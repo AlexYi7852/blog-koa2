@@ -15,7 +15,7 @@ const server = http.createServer((req, res) => {
     res.end(
         JSON.stringify({
             errno: 0,
-            msg: 'test11111'
+            msg: 'Content-typ'
         })
     )
 })

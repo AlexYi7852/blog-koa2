@@ -17,7 +17,7 @@ if (env === 'dev') {
         host: '127.0.0.1'
     }
 }
-if (env === 'prodution') {
+if (env === 'production') {
     // 线上环境配置
     MYSQL_CONFIG = {
         host: 'localhost',

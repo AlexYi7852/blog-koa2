@@ -7,6 +7,9 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
+const fs = require('fs')
+const path = require('path')
+const koaMorgan = require('koa-morgan')
 
 const blog = require('./routes/blog')
 const user = require('./routes/user')
@@ -35,6 +38,24 @@ app.use(async (ctx, next) => {
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
+const env = process.env.NODE_ENV
+// 记录日志
+if (env !== 'production') {
+  // 开发 or 测试环境
+  app.use(koaMorgan('dev', {
+    stream: process.stdout
+  }));
+} else {
+  // 线上环境
+  const fileName = path.join(__dirname, 'logs', 'access.log')
+  const writeStream = fs.createWriteStream(fileName, {
+    flags: 'a' // a: 追加、w: 覆盖
+  })
+  app.use(koaMorgan('combined', {
+    stream: writeStream
+  }));
+}
+
 // session 密匙
 app.keys = ['WJios___--7852#']
 app.use(session({

@@ -10,8 +10,6 @@ const redisStore = require('koa-redis')
 
 const blog = require('./routes/blog')
 const user = require('./routes/user')
-const index = require('./routes/index')
-const users = require('./routes/users')
 
 const { REDIS_CONFIG } = require('./config/db')
 
@@ -55,8 +53,6 @@ app.use(session({
 // routes
 app.use(blog.routes(), blog.allowedMethods())
 app.use(user.routes(), user.allowedMethods())
-app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

@@ -31,7 +31,7 @@ router.get('/list', async (ctx, next) => {
 router.get('/detail', async (ctx, next) => {
     const data = await getDetail(ctx.query.id)
     ctx.body = new SuccessModel(data)
-})
+}) 
 
 router.post('/new', loginCheck, async (ctx, next) => {
     ctx.request.body.author = ctx.session.username
@@ -45,7 +45,7 @@ router.post('/update', loginCheck, async (ctx, next) => {
 })
 
 router.post('/del', loginCheck, async (ctx, next) => {
-    const val = await deleteBlog(ctx.query.id, ctx.session.username)
+    const val = await deleteBlog(ctx.query.id)
     ctx.body = val ? new SuccessModel() : new ErrorModel('删除博客失败')
 })
 

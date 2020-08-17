@@ -44,9 +44,9 @@ const updateBlog = async (id, blogData = {}) => {
     return data.affectedRows ? true : false
 }
 
-const deleteBlog = async (id, author) => {
+const deleteBlog = async (id) => {
     // id 就是删除博客的 id
-    const sql = `delete from blogs where id='${ id }' and author='${ author }'`
+    const sql = `delete from blogs where id='${ id }'`
     const data = await exec(sql)
     return data.affectedRows ? true : false
 }
